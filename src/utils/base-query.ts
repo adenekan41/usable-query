@@ -27,7 +27,8 @@ export type BaseQueryFnType = <
 export const axiosBaseQuery = <ResultType, ErrorType>(
   baseUrl: string,
   inject: (config: AxiosRequestConfig) => AxiosRequestConfig = (config) =>
-    config
+    config,
+  transformResponse: (response: unknown) => unknown = (response) => response
 ): BaseQueryFnType =>
   async function axiosBaseQuery<
     ResultType,
@@ -57,7 +58,13 @@ export const axiosBaseQuery = <ResultType, ErrorType>(
         ...inject(queryFn),
       });
 
-      return result.data;
+      if (transformResponse)
+        return transformResponse(result) as {
+          data?: ResultType;
+          error?: ErrorType;
+        };
+
+      return result as { data?: ResultType; error?: ErrorType };
     } catch (axiosError) {
       const err = axiosError as AxiosError<ErrorType>;
       throw err?.response?.data || err;

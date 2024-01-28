@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from 'axios';
 import { QueryClient } from '@tanstack/react-query';
+import { AxiosRequestConfig } from 'axios';
 
 import { createUsableQuery } from '../usable-query';
 import { axiosBaseQuery } from './base-query';
@@ -7,12 +7,15 @@ import { axiosBaseQuery } from './base-query';
 import type { Endpoints, UsableQueryOptions } from '../types';
 import type { BaseQueryFnType } from './base-query';
 
+type BaseTransformResponse = (response: unknown) => unknown;
+type BaseInject = (config: AxiosRequestConfig) => AxiosRequestConfig;
+type BaseQueryFn = (args: any) => AxiosRequestConfig<any>;
 interface BuildApiConfig {
   /**
    * A function that returns the base query function for `react-query`.
    * @param args The arguments passed to the query function.
    */
-  baseQuery?: (args: any) => AxiosRequestConfig<any>;
+  baseQueryFn?: BaseQueryFn;
   /**
    * The `QueryClient` to use for all queries.
    */
@@ -43,14 +46,43 @@ interface BuildApiConfig {
    * });
    * ```
    */
-  inject?: (config: AxiosRequestConfig) => AxiosRequestConfig;
+  inject?: BaseInject;
+
+  /**
+   * A function that transforms the response from the base query function.
+   * @param response The response from the base query function.
+   * @returns The transformed response.
+   *
+   * @example
+   * ```ts
+   * import { buildApi } from './utils';
+   *
+   * const baseUQuery = buildApi({
+   * baseUrl: 'https://jsonplaceholder.typicode.com',
+   * queryClient: new QueryClient(),
+   * transformResponse: (response) => ({
+   * ...response,
+   * data: {
+   * ...response.data,
+   * createdAt: new Date(response.data.createdAt),
+   * },
+   * }),
+   * });
+   * ```
+   */
+  transformResponse?: BaseTransformResponse;
 }
 
 export function buildApi(config: BuildApiConfig) {
-  const { baseQuery, queryClient, baseUrl, inject } = config;
-  const defaultBaseQueryFn = axiosBaseQuery(baseUrl, inject) as BaseQueryFnType;
+  const { baseQueryFn, queryClient, baseUrl, inject, transformResponse } =
+    config;
+  const defaultBaseQueryFn = axiosBaseQuery(
+    baseUrl,
+    inject,
+    transformResponse
+  ) as BaseQueryFnType;
 
-  const customBaseQueryFn = baseQuery || defaultBaseQueryFn;
+  const customBaseQueryFn = baseQueryFn ?? defaultBaseQueryFn;
 
   // Return the API creation methods
   return {
