@@ -46,16 +46,20 @@ export const axiosBaseQuery = <ResultType, ErrorType>(
         token: __,
       } = queryFn as AxiosRequestConfig & { body?: any; token?: string };
 
-      const result = await axios({
-        url: baseUrl + url,
+      const axiosOptions = {
+        url: `${baseUrl}${url}`,
         method,
-        data: body || data,
+        data: body ?? data,
         params,
         headers: {
           'Content-Type': 'application/json',
           ...headers,
         },
-        ...inject(queryFn),
+      };
+
+      const result = await axios({
+        ...axiosOptions,
+        ...inject(axiosOptions),
       });
 
       if (transformResponse)
