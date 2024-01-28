@@ -1,0 +1,61 @@
+{
+  "name": "usable-query",
+  "version": "1.0.1",
+  "description": "UsableQuery simplifies the use of React Query by offering a streamlined and centralized approach to managing queries and mutations. Designed for developers who seek efficiency and ease in their React applications, this package enables quick setup, intuitive syntax, and seamless navigation across queries and mutations. Ideal for both small projects and large-scale applications, UsableQuery enhances the React Query experience by providing a more accessible and user-friendly interface for data fetching and state management.",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "files": [
+    "dist"
+  ],
+  "source": "src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "lint": "eslint . --ext .js,.ts,.tsx",
+    "prepublishOnly": "yarn build",
+    "preversion": "git checkout main && git pull origin main && yarn install && npm run build",
+    "release:major": "npm version major",
+    "release:minor": "npm version minor",
+    "release:patch": "npm version patch",
+    "postversion": " git push --set-upstream origin main && git push origin --tags && npm publish --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adenekan41/usable-query.git"
+  },
+  "keywords": [
+    "redux",
+    "redux-toolkit",
+    "create-slice",
+    "enhanced",
+    "slice"
+  ],
+  "author": "Adenekan Wonderful <hellocodewonders@example.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adenekan41/usable-query/issues"
+  },
+  "homepage": "https://github.com/adenekan41/usable-query#readme",
+  "dependencies": {
+    "@tanstack/react-query": "^4.0.5",
+    "axios": "^1.6.5"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^4.0.5",
+    "react": "^17.0.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.177",
+    "@types/node": "^20.11.8",
+    "@types/react": "^17.0.37",
+    "typescript": "^4.5.5",
+    "vite": "^4.2.1",
+    "vite-plugin-dts": "^2.2.0"
+  }
+}
