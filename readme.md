@@ -1,7 +1,7 @@
 <br />
 <p align="center">
 	<a href="https://i.ibb.co/kcpWdj0/EY.png">
- 	<img src="https://i.ibb.co/rZdp765/Dribbble-shot-HD-3.png" width="95%" alt="usable-query">
+ 	<img src="https://i.ibb.co/rZdp765/Dribbble-shot-HD-3.png" width="98%" alt="usable-query">
 	</a>
 </p>
 
@@ -114,7 +114,6 @@ const userUQuery = baseUQuery.createUsableQuery({
 });
 
 export const { useGetUsersQuery } = userUQuery; // export the generated hook and also the generated query function for server calls
-
 ```
 
 
@@ -168,10 +167,8 @@ The `createUsableQuery` function is used to create queries and mutations. It tak
 | --- | --- | --- |
 | `key` | `string` | The key for this query or mutation. |
 | `endpoints` | `Endpoints` | A function that returns an object containing the endpoints for this query or mutation. |
-| `setup` | `{
-    queryClient: QueryClient;
-    baseQueryFn: any;
-}` | An optional function that can be used to override the default queryFn for all queries created with this instance. |
+| `setup` | `{queryClient: QueryClient;baseQueryFn: any;}` | An optional function that can be used to override the default queryFn for all queries created with this instance. |
+
 
 #### Returns
 - `use{key}Query` - A hook that can be used to fetch data for this query or mutation.
@@ -218,6 +215,107 @@ userUQuery.stopListening({
 }); // stop listening for changes to the query or mutation
 
 export const { useGetUsersQuery } = userUQuery; // export the generated hook and also the generated query function for server calls
+```
+
+
+### `Endpoints`
+
+The `Endpoints` type is an object containing the endpoints for a query or mutation. It takes in an object with the following properties:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `query` | `QueryEndpoint` | An optional function that returns an object containing the query endpoint for this query or mutation. |
+| `mutation` | `MutationEndpoint` | An optional function that returns an object containing the mutation endpoint for this query or mutation. |
+
+### `builder.query`
+
+The `builder.query` function is used to create a query endpoint. It takes in an object with the following properties:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `key` | `string` | The key for this query or mutation. |
+| `queryFn` | `QueryFn` | The queryFn for this query or mutation. |
+| `isInfinite` | `boolean` | An optional boolean that can be used to indicate whether this query is infinite. |
+| `transformResponse` | `TransformResponse` | An optional function that can be used to transform the response of this query or mutation. |
+
+#### Example
+
+```ts
+import { baseUQuery } from './u-api-query';
+
+type User = {
+  id: number;
+  name: string;
+};
+
+const userUQuery = baseUQuery.createUsableQuery({
+  key: 'getUsers',
+  endpoints: (builder) => ({
+    getUsers: builder.query<null, User[]>({
+      key: 'getUsers',
+      queryFn: () => ({
+        url: '/users',
+        method: 'GET',
+      }),
+    }),
+  }),
+  isInfinite: true,
+  transformResponse: (response) => response.data,
+});
+
+export const { useGetUsersQuery } = userUQuery; // export the generated hook and also the generated query function for server calls
+```
+
+
+### `builder.mutation`
+
+The `builder.mutation` function is used to create a mutation endpoint. It takes in an object with the following properties:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `key` | `string` | The key for this query or mutation. |
+| `mutationFn` | `MutationFn` | The mutationFn for this query or mutation. |
+| `invalidatesQueries` | `string[]` | An optional array of keys for queries that should be invalidated when this mutation is performed. |
+| `setCache` | `SetCache` | An optional function that can be used to set the cache for this mutation. |
+
+#### Example
+
+```ts
+
+import { baseUQuery } from './u-api-query';
+
+type User = {
+  id: number;
+  name: string;
+};
+
+
+const userUQuery = baseUQuery.createUsableQuery({
+  key: 'getUsers',
+  endpoints: (builder) => ({
+    getUsers: builder.query<null, User[]>({
+      key: 'getUsers',
+      queryFn: () => ({
+        url: '/users',
+        method: 'GET',
+      }),
+    }),
+    createUser: builder.mutation<null, User>({
+      key: 'createUser',
+      mutationFn: (user) => ({
+        url: '/users',
+        method: 'POST',
+        body: user,
+      }),
+      invalidatesQueries: ['getUsers'],
+      setCache: (cache, { data }) => {
+        cache.setQueryData('getUsers', (old) => [...old, data]);
+      },
+    }),
+  }),
+});
+
+export const { useGetUsersQuery, useCreateUserMutation } = userUQuery; // export the generated hook and also the generated query function for server calls
 ```
 
 ## 🤨 Motivation
