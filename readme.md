@@ -1,7 +1,7 @@
 <br />
 <p align="center">
 	<a href="https://i.ibb.co/kcpWdj0/EY.png">
- 	<img src="https://i.ibb.co/rZdp765/Dribbble-shot-HD-3.png" width="80%" alt="usable-query">
+ 	<img src="https://i.ibb.co/rZdp765/Dribbble-shot-HD-3.png" width="95%" alt="usable-query">
 	</a>
 </p>
 
