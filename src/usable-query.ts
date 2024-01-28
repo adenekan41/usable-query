@@ -1,5 +1,5 @@
 import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
-import { capitalizeFirstLetter, stringifyURL, usableListen } from './utils';
+import { capitalizeFirstLetter, stringifyURL, usableListen } from './lib';
 
 import type {
   UseInfiniteQueryOptions,
