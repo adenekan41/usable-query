@@ -9,6 +9,8 @@
 
 ## Usable Query: Simplifying React Query Management
 
+[View on CodeSandbox](https://codesandbox.io/p/sandbox/usable-query-pwzdhk)
+
 [![npm](https://badge.fury.io/js/usable-query.svg)](https://www.npmjs.com/package/usable-query)
 
 [![NPM](https://nodei.co/npm/usable-query.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/usable-query/)
@@ -57,7 +59,7 @@ Before you begin, ensure that you have the following installed:
 
 ### Setting Up
 
-[View on CodeSandbox](https://codesandbox.io/s/usable-query-demo-1-1jx7u?file=/src/App.tsx)
+[View on CodeSandbox](https://codesandbox.io/p/sandbox/usable-query-pwzdhk)
 
 After installing, you can set up UsableQuery in your project. Here's a basic example to get you started, first we need to setup our base UsableQuery instance:
 
