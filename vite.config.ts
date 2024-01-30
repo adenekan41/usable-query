@@ -4,7 +4,7 @@ import dts from 'vite-plugin-dts';
 
 import packgeJson from './package.json';
 
-const ignoreDeps = [''];
+const ignoreDeps = ['axios'];
 const externalPackages = Object.keys(packgeJson.dependencies).filter(
   (k) => !ignoreDeps.includes(k)
 );
@@ -15,7 +15,7 @@ export default defineConfig(async () => ({
   },
   build: {
     outDir: path.resolve(__dirname, 'dist'),
-
+    minify: true,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'UsableQuery',
