@@ -1,6 +1,6 @@
-import dts from 'vite-plugin-dts';
-import { defineConfig } from 'vite';
 import path from 'path';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 import packgeJson from './package.json';
 
@@ -23,13 +23,14 @@ export default defineConfig(async () => ({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: [...externalPackages],
+      external: [...externalPackages, '@tanstack/react-query'],
       output: {
         globals: {
           ...externalPackages.reduce((acc, curr) => {
             acc[curr] = curr;
             return acc;
           }, {}),
+          '@tanstack/react-query': 'ReactQuery',
         },
       },
     },

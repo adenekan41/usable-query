@@ -1,8 +1,8 @@
 import type {
-  UseQueryOptions,
-  UseMutationOptions,
-  QueryClient,
   InvalidateQueryFilters,
+  QueryClient,
+  UseMutationOptions,
+  UseQueryOptions,
 } from '@tanstack/react-query';
 
 import type {
@@ -133,7 +133,16 @@ export const usableListen = <TData extends unknown, TError extends unknown>(
         );
       }
 
-      options?.onSuccess?.(data, variable, mutation);
+      /**
+       * Cast the options to UseMutationOptions to get access to the onSuccess callback.
+       * This is a bit of a hack, but it works.
+       * @todo Find a better way to do this.
+       */
+      (options as UseMutationOptions<any>)?.onSuccess?.(
+        data,
+        variable,
+        mutation
+      );
     },
     onError: async (error, variable, mutation) => {
       await notifyListeners({
@@ -143,7 +152,16 @@ export const usableListen = <TData extends unknown, TError extends unknown>(
         error: error as TError,
       });
 
-      options?.onError?.(error, variable, mutation);
+      /**
+       * Cast the options to UseMutationOptions to get access to the onSuccess callback.
+       * This is a bit of a hack, but it works.
+       * @todo Find a better way to do this.
+       */
+      (options as UseMutationOptions<any>)?.onError?.(
+        error,
+        variable,
+        mutation
+      );
     },
     onSettled: async (data, error, variable, context) => {
       // onSettled is called whether the query was successful or not
@@ -155,7 +173,18 @@ export const usableListen = <TData extends unknown, TError extends unknown>(
         data: data as TData,
         error: error as TError,
       });
-      options?.onSettled?.(data, error, variable, context);
+
+      /**
+       * Cast the options to UseMutationOptions to get access to the onSuccess callback.
+       * This is a bit of a hack, but it works.
+       * @todo Find a better way to do this.
+       */
+      (options as UseMutationOptions<any>)?.onSettled?.(
+        data,
+        error,
+        variable,
+        context
+      );
     },
   });
 
