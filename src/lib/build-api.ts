@@ -1,9 +1,8 @@
-import { QueryClient } from '@tanstack/react-query';
-import { AxiosRequestConfig } from 'axios';
-
 import { createUsableQuery } from '../usable-query';
 import { axiosBaseQuery } from './base-query';
 
+import type { QueryClient } from '@tanstack/react-query';
+import type { AxiosRequestConfig } from 'axios';
 import type { Endpoints, UsableQueryOptions } from '../types';
 
 type BaseTransformResponse = (response: unknown) => unknown;
