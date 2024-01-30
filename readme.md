@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-	<a href="https://i.ibb.co/kcpWdj0/EY.png">
+	<a href="https://i.ibb.co/rZdp765/Dribbble-shot-HD-3.png">
  	<img src="https://i.ibb.co/rZdp765/Dribbble-shot-HD-3.png" width="98%" alt="usable-query">
 	</a>
 </p>
@@ -216,7 +216,7 @@ const userUQuery = baseUQuery.createUsableQuery({
 
 userUQuery.startListening({
   matches: (action) => ['getUsers'].includes(action.key),
-  performAction: async (action: any) => {
+  performAction: async (action: function) => {
     // perform action
   },
 }); // start listening for changes to the query or mutation
