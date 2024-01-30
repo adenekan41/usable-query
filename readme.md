@@ -51,6 +51,16 @@ yarn add @tanstack/react-query
 yarn add usable-query
 ```
 
+### Using CDN
+
+```html
+<!-- React Query -->
+<script src="https://cdn.skypack.dev/@tanstack/react-query"></script>
+
+<!-- Usable Query -->
+<script src="https://cdn.skypack.dev/usable-query"></script>
+```
+
 
 ## 📖 Getting Started
 
