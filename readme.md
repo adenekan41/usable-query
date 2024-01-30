@@ -31,17 +31,26 @@
 
 ## ⬇ Installing [usable-query](https://github.com/adenekan41/usable-query)
 
-### Using NPM
+> [!IMPORTANT]
+> @tanstack/react-query is a peer dependency of usable-query, so you must install it in your project before installing usable-query.
+
+
+#### Using NPM
 
 ```bash
+npm i @tanstack/react-query 
+
 npm i usable-query
 ```
 
 ### Using Yarn
 
 ```bash
+yarn add @tanstack/react-query
+
 yarn add usable-query
 ```
+
 
 ## 📖 Getting Started
 

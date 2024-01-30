@@ -5,11 +5,11 @@ import { createUsableQuery } from '../usable-query';
 import { axiosBaseQuery } from './base-query';
 
 import type { Endpoints, UsableQueryOptions } from '../types';
-import type { BaseQueryFnType } from './base-query';
 
 type BaseTransformResponse = (response: unknown) => unknown;
 type BaseInject = (config: AxiosRequestConfig) => AxiosRequestConfig;
 type BaseQueryFn = (args: any) => AxiosRequestConfig<any>;
+
 interface BuildApiConfig {
   /**
    * A function that returns the base query function for `react-query`.
@@ -76,11 +76,7 @@ interface BuildApiConfig {
 export function buildApi(config: BuildApiConfig) {
   const { baseQueryFn, queryClient, baseUrl, inject, transformResponse } =
     config;
-  const defaultBaseQueryFn = axiosBaseQuery(
-    baseUrl,
-    inject,
-    transformResponse
-  ) as BaseQueryFnType;
+  const defaultBaseQueryFn = axiosBaseQuery(baseUrl, inject, transformResponse);
 
   const customBaseQueryFn = baseQueryFn ?? defaultBaseQueryFn;
 
