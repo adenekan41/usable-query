@@ -15,7 +15,25 @@
 
 [![NPM](https://nodei.co/npm/usable-query.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/usable-query/)
 
-## ⚡️About
+## 🤨 Motivation
+
+### The Challenge in Managing Data Fetching in React
+While React Query is a powerful tool for managing server state, it can be challenging to work with, especially for developers new to the library or those working on large-scale projects. The syntax for defining and using queries and mutations can be confusing and difficult to read, and the process of setting up and managing server state can be tedious and time-consuming. This can lead to a lot of boilerplate code and make it difficult to maintain and scale React applications.
+
+### Introducing UsableQuery
+UsableQuery was born out of a need to simplify and streamline the process of working with queries and mutations in React applications. While React Query itself is a powerful tool for managing server state, I recognized that there could be a more intuitive and efficient way to handle these data fetching mechanisms, especially for developers new to the library or those working on large-scale projects.
+
+### Goals
+- *Simplify Query Syntax:* Provide a more straightforward and readable syntax for defining and using queries and mutations, making it easier for developers of all levels to work with data fetching in React.
+
+- *Centralize Query Management:* Offers a centralized system to manage all queries and mutations, reducing boilerplate and improving maintainability. see [this](#centralized-query-management) for more details.
+
+- *Enhance Code Quality:* Encourage better coding practices and architecture by providing a structured and consistent way to handle data fetching and state management.
+
+- *Facilitate Easy Integration and Extensibility:* Ensure that UsableQuery seamlessly integrates with existing React Query setups and is flexible enough to adapt to various use cases and requirements.
+
+
+## ⚡️About UsableQuery
 
 [UsableQuery](https://github.com/adenekan41/usable-query), is a React utility package designed to enhance the experience of working with the React Query library. It provides a streamlined and centralized approach for managing queries and mutations, making data fetching and state management in React applications both efficient and intuitive. Built with the needs of modern web developers in mind, UsableQuery aims to reduce boilerplate, improve readability, and accelerate the development process in React-based projects.
 
@@ -66,7 +84,7 @@ yarn add usable-query
 
 This guide will walk you through the process of installing and implementing UsableQuery in your React project.
 
-#### Prerequisites
+### Prerequisites
 Before you begin, ensure that you have the following installed:
 
 - Node.js (version 14 or later)
@@ -76,9 +94,7 @@ Before you begin, ensure that you have the following installed:
 
 
 
-### Setting Up
-
-[View on CodeSandbox](https://codesandbox.io/p/sandbox/usable-query-pwzdhk)
+### 🛠️ Implementation
 
 After installing, you can set up UsableQuery in your project. Here's a basic example to get you started, first we need to setup our base UsableQuery instance:
 
@@ -160,9 +176,11 @@ function App() {
 }
 ```
 
-You see how easy it is to get started with UsableQuery? You can now start building your application with UsableQuery.
+Want to see a demo of UsableQuery in a project? [View on CodeSandbox](https://codesandbox.io/p/sandbox/usable-query-pwzdhk)
 
-## 📚 Documentation
+You can now start building your application with UsableQuery.
+
+## 📚 API Documentation
 
 ### `buildApi`
 
@@ -339,22 +357,6 @@ const userUQuery = baseUQuery.createUsableQuery({
 export const { useGetUsersQuery, useCreateUserMutation } = userUQuery; // export the generated hook and also the generated query function for server calls
 ```
 
-## 🤨 Motivation
-
-### The Challenge in Managing Data Fetching in React
-While React Query is a powerful tool for managing server state, it can be challenging to work with, especially for developers new to the library or those working on large-scale projects. The syntax for defining and using queries and mutations can be confusing and difficult to read, and the process of setting up and managing server state can be tedious and time-consuming. This can lead to a lot of boilerplate code and make it difficult to maintain and scale React applications.
-
-### Why UsableQuery?
-UsableQuery was born out of a need to simplify and streamline the process of working with queries and mutations in React applications. While React Query itself is a powerful tool for managing server state, I recognized that there could be a more intuitive and efficient way to handle these data fetching mechanisms, especially for developers new to the library or those working on large-scale projects.
-
-### My Goals
-- *Simplify Query Syntax:* Provide a more straightforward and readable syntax for defining and using queries and mutations, making it easier for developers of all levels to work with data fetching in React.
-
-- *Centralize Query Management:* Offers a centralized system to manage all queries and mutations, reducing boilerplate and improving maintainability. see [this](#centralized-query-management) for more details.
-
-- *Enhance Code Quality:* Encourage better coding practices and architecture by providing a structured and consistent way to handle data fetching and state management.
-
-- *Facilitate Easy Integration and Extensibility:* Ensure that UsableQuery seamlessly integrates with existing React Query setups and is flexible enough to adapt to various use cases and requirements.
 
 ## 📝 License
 
